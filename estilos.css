@@ -1,0 +1,31 @@
+.navbar-brand img {
+    max-width: 60px;
+}
+.navbar-brand:hover {
+    filter: invert(10%);
+}
+.usuario {
+    display: block;
+}
+.usuario img {
+    max-width: 60px;
+    filter: invert(100%);
+}
+.usuario a {
+    text-decoration: none;
+    color: rgba(255,255,255,.55);
+}
+.usuario a:hover {
+    color: rgba(255,255,255,.75);
+}
+.usuario ul {
+  list-style-type: none;
+  margin: auto;
+  margin-right: 30px;
+  text-align: center;
+}
+iframe {
+    width: 100%;
+    height: 660px;
+}
+
