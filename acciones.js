@@ -1,4 +1,4 @@
-document.getElementById('ingresar').style.display = 'none';
+/*document.getElementById('ingresar').style.display = 'none';
 document.getElementById('registrarse').style.display = 'none';
 function ingresar() {
     document.getElementById('ingresar').style.display = 'block';
@@ -9,4 +9,4 @@ function registrarse() {
     document.getElementById('registrarse').style.display = 'block';
     document.getElementById('ingresar').style.display = 'none';
     return false;
-};
+};*/
