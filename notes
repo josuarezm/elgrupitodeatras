@@ -1,0 +1,11 @@
+nombre string
+metros cuadrados double
+# habitaciones int
+# baños     int
+# garajes   int
+
+
+precio  double
+barrio  string
+fotos    img
+estrato int
