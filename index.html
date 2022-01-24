@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="imagenes/icono.png" />
     <link href="estilos.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -25,17 +24,17 @@
                         <a class="nav-link" href="index.html" title="Inicio">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Gestion</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Gestión</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Crear publicacion</a></li>
-                            <li><a class="dropdown-item" href="#">Editar publicacion</a></li>
+                            <li><a class="dropdown-item" href="crearOferta.html">Crear Anuncio</a></li>
+                            <li><a class="dropdown-item" href="editarOferta.html">Editar Anuncio</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#sidebarContacto" data-bs-toggle="offcanvas" role="button" title="Contactenos" aria-controls="sidebar">Contáctenos</a>
                     </li>
                 </ul>
-                <div class="d-flex usuario">
+                <div class="navbar-nav d-flex usuario">
                     <ul>
                         <li><a href="#sidebarLogin" class="d-block mt-3" data-bs-toggle="offcanvas" role="button"
                                 aria-controls="sidebar">Ingresar</a></li>
@@ -56,32 +55,21 @@
     <div class="container-fluid" id="map-container">
         <div id="map"></div>
     </div>
-    
-    <!--
-    <div class="container-fluid">
-        <div class="col-9 border border-dark">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63631.04952501349!2d-74.13487051607082!3d4.604659548467998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f996b4508fa03%3A0x3d84c9f15dc19148!2sUniversidad%20Nacional%20de%20Colombia!5e0!3m2!1ses-419!2sco!4v1639255038954!5m2!1ses-419!2sco" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </div>
-    -->
-
 
     <!--offCanvas login-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarLogin" aria-labelledby="sidebar-label">
         <div class="offcanvas-header">
+            <h4 class="text-center mt-3">Iniciar Sesión</h4>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            <!-- -----close button (don´t works i don´t know why)--------
-            <button type="button" class="btn-close" data-bs-dimiss="offcanvas"aria-label="Close"></button>-->
         </div>
         <div class="offcanvas-body">
             <div id="login">
                 <form action="index.html" method="post">
-                    <h4 class="text-center mt-3">Iniciar sesion</h4>
                     <div class="mb-3 mt-3">
                         <input type="text" class="form-control" id="user" placeholder="Nombre de Usuario" name="user">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" id="pass" placeholder="Contrasena" name="pass">
+                        <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass">
                     </div>
                     <div class="text-center mb-3">
                         <button type="submit" class="btn btn-primary">Ingresar</button>
@@ -93,23 +81,33 @@
     <!--offCanvas register-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRegister" aria-labelledby="sidebar-label">
         <div class="offcanvas-header">
+            <h4 class="text-center mt-3">Registro</h4>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            <!-- -----close button (don´t works i don´t know why)--------
-            <button type="button" class="btn-close" data-bs-dimiss="offcanvas"aria-label="Close"></button>-->
         </div>
         <div class="offcanvas-body">
             <div id="register">
                 <form action="index.html" method="post">
-                    <h4 class="text-center mt-3">Registro</h4>
                     <div class="mb-3 mt-3">
-                        <input type="email" class="form-control" id="email" placeholder="Correo electronico"
-                            name="email">
-                    </div>
-                    <div class="mb-3">
                         <input type="text" class="form-control" id="user" placeholder="Nombre de Usuario" name="user">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" id="pass" placeholder="Contrasena" name="pass">
+                        <input type="text" class="form-control" id="firstName" placeholder="Nombres" name="firstName">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="lastName" placeholder="Apellidos" name="lastName">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="userCellPhone" placeholder="Celular" name="userPhone">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="Correo electrónico"
+                            name="email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="pass1" placeholder="Contraseña" name="pass1">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="pass2" placeholder="Confirmar contraseña" name="pass2">
                     </div>
                     <div class="text-center mb-3">
                         <button type="submit" class="btn btn-primary">Registrarse</button>
@@ -390,14 +388,12 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarContacto"
     aria-labelledby="sidebar-label">
         <div class="offcanvas-header">
+            <h4 class="text-center mt-3">Contáctenos</h4>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            <!-- -----close button (don´t works i don´t know why)--------
-            <button type="button" class="btn-close" data-bs-dimiss="offcanvas"aria-label="Close"></button>-->
         </div>
         <div class="offcanvas-body">
             <div id="login">
                 <form action="index.html" method="post">
-                    <h4 class="text-center mt-3">Contáctenos</h4>
                     <br>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
