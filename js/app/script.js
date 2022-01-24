@@ -1,7 +1,7 @@
 function cargarPagina() {
 
     const oferta = {
-        nombre: "Casa en chapinero",
+        nombre: "Casa en Chapinero",
         tipoContrato: [false, true], //[0] -> venta [1] -> arriendo
         area: 45.12,
         habitaciones: 2,
