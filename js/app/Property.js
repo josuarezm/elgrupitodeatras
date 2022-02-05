@@ -3,6 +3,9 @@ class Property{
         this.id = id
         this.loadInfo()
     };
+    toJson(){
+        return JSON.stringify(this);
+    }
     
     loadInfo() {
         /* Load the info of the house */
