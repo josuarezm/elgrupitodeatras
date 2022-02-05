@@ -5,7 +5,6 @@ markersApp[0].LoadProperty()
 
 fillInfoHouse()
 
-
 function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8,
