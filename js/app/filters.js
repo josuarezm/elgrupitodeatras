@@ -22,12 +22,16 @@ class Filter{
         this.floors = floors;
         this.features = features;
     }
+
+    toJson(){
+        return JSON.stringify(this);
+    }
 }
 function loadFeatures(){
     return ["Terraza", "zotano", "parqueadero", "Seguridad", "amueblado", "otra característica"];
 }
 function loadFilters(){
-    let typeFilter = new SingleFilter("Casa", "type", ["Casa", "Apratamento", "Bodega", "Oficina"]);
+    let typeFilter = new SingleFilter("Casa", "type", ["Casa", "Apartamento", "Oficina", "Bodega"]);
     let priceFilter = new SingleFilter({max:1000000000, min:0},"price");
     let areaFilter = new SingleFilter({max:70, min:25},"area");
     let estFilter = new SingleFilter("3", "est", ["1","2","3","4","5","6"]);
@@ -39,18 +43,43 @@ function loadFilters(){
 
 function fillFilters(filter = loadFilters()){
     // tipo de inmueble
-    console.log("btnradioType"+filter.type.value)
-    document.getElementById("btnradioType"+filter.type.value).checked = true;
+    // check is any
+    if(filter.type.value == -1){
+        document.getElementById("btnradioTypeAny").checked = true;
+    }
+    else{
+        document.getElementById("btnradioType"+filter.type.value).checked = true;
+    }
     // price
-    document.getElementById("FiltersminValueInput").value = filter.price.value.min;
-    document.getElementById("FiltersmaxValueInput").value = filter.price.value.max;
+    if(filter.price.value == -1){
+        document.getElementById("btnradioPriceAny").checked = true;
+    }
+    else{
+        document.getElementById("FiltersminValueInput").value = filter.price.value.min;
+        document.getElementById("FiltersmaxValueInput").value = filter.price.value.max;
+    }
     //area
-    document.getElementById("FiltersminAreaText").value = filter.area.value.min;
-    document.getElementById("FiltersmaxAreaText").value = filter.area.value.max;
+    if(filter.price.value == -1){
+        document.getElementById("btnradioAreaAny").checked = true;
+    }
+    else{
+        document.getElementById("FiltersminAreaInput").value = filter.area.value.min;
+        document.getElementById("FiltersmaxAreaInput").value = filter.area.value.max;
+    }
     //est
-    document.getElementById("btnradioEst"+filter.est.value).checked = true;
+    if(filter.est.value == -1){
+        document.getElementById("btnradioEstAny").checked = true;
+    }
+    else{
+        document.getElementById("btnradioEst"+filter.est.value).checked = true;    
+    }
     //floors
-    document.getElementById("FiltersNumberFloors").value = filter.floors.value;
+    if(filter.floors.value == -1){
+        document.getElementById("btnradioFloorsAny").checked = true;
+    }
+    else{
+        document.getElementById("FiltersNumberFloors").value = filter.floors.value;
+    }
     //features
     let features = filter.features.options
     const docElement = document.getElementById("floatingSelectFeatures");
@@ -65,4 +94,132 @@ function fillFilters(filter = loadFilters()){
         }
         docElement.appendChild(element);
     }
+    if(filter.features.value == -1){
+        document.getElementById("btnradioFeaturesAny").checked = true
+    }
+}
+
+function cleanFilters(){
+    // tipo de inmueble
+    document.getElementById("btnradioTypeAny").checked = true;
+    // price
+    document.getElementById("btnradioPriceAny").checked = true;
+    document.getElementById("FiltersminValueInput").value = null;
+    document.getElementById("FiltersmaxValueInput").value = null;
+    //area
+    document.getElementById("btnradioAreaAny").checked = true;
+    document.getElementById("FiltersminAreaText").value = null;
+    document.getElementById("FiltersmaxAreaText").value = null;
+    //est
+    document.getElementById("btnradioEstAny").checked = true;
+    //floors
+    document.getElementById("FiltersNumberFloors").value = null;
+    document.getElementById("btnradioFloorsAny").checked = true;
+    //features
+    document.getElementById("btnradioFeaturesAny").checked = true;
+}
+
+function updateFilter(filter = new Filter()){
+    //Type
+    //check any option
+    let anyOption = document.getElementById("btnradioTypeAny").checked;
+    if(anyOption){
+        //update filter value
+        filter.type.value = -1
+    }
+    else{
+        //check other options
+        for (let index = 0; index < filter.type.options.length; index++) {
+            let elementChecked = document.getElementById("btnradioType"+filter.type.options[index]).checked;
+            if(elementChecked){
+                //update filter value
+                filter.type.value = filter.type.options[index];
+            }
+        }
+    }
+    //Price
+    //check any option
+    anyOption = document.getElementById("btnradioPriceAny").checked;
+    // check price options are not empty
+    let optionsEmpty = false
+    let min = document.getElementById("FiltersminValueInput").value;
+    let max = document.getElementById("FiltersmaxValueInput").value;
+    if(min == null || max == null){
+        optionsEmpty = true
+        //alert!
+    }
+    if(anyOption || optionsEmpty){
+        //update filter value
+        filter.price.value = -1
+    }
+    else{
+        //update filter value
+        filter.price.value.min = min;
+        filter.price.value.max = max;
+    }
+    //area
+    //check any option
+    anyOption = document.getElementById("btnradioAreaAny").checked;
+    // check options are not empty
+    optionsEmpty = false
+    min = document.getElementById("FiltersminAreaInput").value;
+    max = document.getElementById("FiltersmaxAreaInput").value;
+    if(min == null || max == null){
+        optionsEmpty = true
+        //alert!
+    }
+    if(anyOption || optionsEmpty){
+        //update filter value
+        filter.area.value = -1
+    }
+    else{
+        //update filter value
+        filter.area.value.min = min;
+        filter.area.value.max = max;
+    }
+    // est
+    //check any option
+    anyOption = document.getElementById("btnradioEstAny").checked;
+    if(anyOption){
+        //update filter value
+        filter.est.value = -1
+    }
+    else{
+        //check other options
+        for (let index = 0; index < filter.est.options.length; index++) {
+            let elementChecked = document.getElementById("btnradioEst"+filter.est.options[index]).checked;
+            if(elementChecked){
+                //update filter value
+                filter.est.value = filter.est.options[index];
+            }
+        }
+    }
+    // floors
+    //check any option
+    anyOption = document.getElementById("btnradioFloorsAny").checked;
+    optionsEmpty = false
+    let floors = document.getElementById("FiltersNumberFloors").value;
+    if(floors == null){
+        optionsEmpty = true
+        //alert!
+    }
+    if(anyOption || optionsEmpty){
+        //update filter value
+        filter.floors.value = -1
+    }
+    else{
+        //update filter value
+        filter.floors.value = floors
+    }
+    // features
+    //check any option
+    anyOption = document.getElementById("btnradioFeaturesAny").checked;
+    if(anyOption){
+        //update filter value
+        filter.features.value = -1
+    }
+    else{
+        filter.features.value = document.getElementById("floatingSelectFeatures").value
+    }
+    console.log(filter.toJson())
 }

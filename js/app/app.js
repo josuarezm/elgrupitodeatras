@@ -34,6 +34,7 @@ function initMap() {
             var myOffCanvas = document.getElementById("sideBarMarker");
             var bsOffCanvas = new bootstrap.Offcanvas   (myOffCanvas);
             eachMarker.LoadProperty();
+            console.log(eachMarker.toJson())
             fillInfoHouse(eachMarker.property)
             bsOffCanvas.toggle()
             

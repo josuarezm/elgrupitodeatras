@@ -7,6 +7,9 @@ class AppMarker{
     LoadProperty(){
         this.property = new Property(this.idHouse);
     }
+    toJson(){
+        return JSON.stringify(this);
+    }
 }
 function initMarkers(){
     /* Load markers from database */
