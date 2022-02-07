@@ -2,7 +2,8 @@ class AppMarker{
     constructor(lt,lg,idHouse){
         this.pos = {lat:lt ,lng:lg }
         this.idHouse = idHouse;
-        this.property = null
+        this.marker = null;
+        this.property = null;
     }
     LoadProperty(){
         this.property = new Property(this.idHouse);

@@ -1,13 +1,19 @@
 class Property{
     constructor(id){
         this.id = id
-        this.loadInfo()
     };
     toJson(){
         return JSON.stringify(this);
     }
-    
-    loadInfo() {
+    async loadJson(){
+        // TODO
+        return "";
+    }
+
+    async loadInfo() {
+        jsonStr = this.loadJson()
+
+        // TODO actualizar los atributos con la info del Json
         /* Load the info of the house */
         if(this.id == 0){
             /* Ubicación */
@@ -63,5 +69,7 @@ class Property{
             this.img3 = "imagenes/imagenCasa06.jpg"
 
         }
-    };
+    }
+
+    
 }

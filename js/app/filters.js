@@ -1,6 +1,8 @@
 
+
 function removeAllChilds(a) {
-    var a = document.getElementById(a);
+    var a
+     = document.getElementById(a);
     while (a.hasChildNodes())
         a.removeChild(a.firstChild);
 }
@@ -31,12 +33,12 @@ function loadFeatures(){
     return ["Terraza", "zotano", "parqueadero", "Seguridad", "amueblado", "otra característica"];
 }
 function loadFilters(){
-    let typeFilter = new SingleFilter("Casa", "type", ["Casa", "Apartamento", "Oficina", "Bodega"]);
-    let priceFilter = new SingleFilter({max:1000000000, min:0},"price");
+    let typeFilter = new SingleFilter(-1, "type", ["Casa", "Apartamento", "Oficina", "Bodega"]);
+    let priceFilter = new SingleFilter(-1,"price");
     let areaFilter = new SingleFilter({max:70, min:25},"area");
-    let estFilter = new SingleFilter("3", "est", ["1","2","3","4","5","6"]);
-    let floors = new SingleFilter(3, "floors");
-    let features = new SingleFilter("Terraza", "features", loadFeatures());
+    let estFilter = new SingleFilter(-1, "est", ["1","2","3","4","5","6"]);
+    let floors = new SingleFilter(-1, "floors");
+    let features = new SingleFilter(-1, "features", loadFeatures());
     let filterapp = new Filter(typeFilter, priceFilter, areaFilter, estFilter, floors, features);
     return filterapp;
 }
@@ -223,3 +225,33 @@ function updateFilter(filter = new Filter()){
     }
     console.log(filter.toJson())
 }
+
+async function makeQuery(){
+    //TODO
+    return ""
+}
+
+function JsonToMarkers(jsonStr){
+    //TODO
+    return null
+}
+
+function updateMarkers(newMarkers){
+    //TODO
+    return null
+}
+async function doFilter(filters){
+    updateFilter(filters);
+    const answerQuery = makeQuery();
+    const newMarkers = JsonToMarkers(answerQuery);
+    updateMarkers(newMarkers);
+}
+
+
+
+//var filters = loadFilters();
+//fillFilters(filters);
+//document.getElementById("btnCleanFilters").addEventListener("click",cleanFilters)
+//document.getElementById("btnInitFilters").addEventListener("click",function(ev){
+//    doFilter(filters)
+//})
