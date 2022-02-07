@@ -245,12 +245,7 @@ function jsonToMarkers(jsonStr){
 }
 
 
-async function doFilter(filters){
-    updateFilter(filters);
-    const answerQuery = makeQuery(filter);
-    const newMarkers = jsonToMarkers(answerQuery);
-    updateMarkers(newMarkers);
-}
+
 
 
 

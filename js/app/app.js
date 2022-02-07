@@ -1,7 +1,9 @@
 // app objects
 let map;
 let filters = loadFilters();
-let markersApp = initMarkers(filters);
+fillFilters(filters);
+let markersApp;
+makeRequest('https://meet.google.com/anu-antz-njt',null,0)
 let property;
 let markerClust;
 let http_request = false;
@@ -33,7 +35,6 @@ function removeMarkers(){
     }
 }
 async function loadInfoProperty(){
-    property.loadInfo();
     fillInfoHouse(property);
     
     var myOffCanvas = document.getElementById("sideBarMarker");
@@ -55,8 +56,8 @@ function printMarkers(){
             //infoWindow.open(map, marker);
             ;
             property = new Property(eachMarker.idHouse);
-            loadInfoProperty()
-            
+            makeRequest('http://kasapp-elgrupitodeatras.herokuapp.com/map/detail/'+property.id, null,2 );
+            loadInfoProperty();
             console.log(eachMarker.marker);
             console.log(marker)
         }
@@ -109,33 +110,59 @@ function makeRequest(url, data = null, req) {
     if(req ==0){
         // load all markers
         
-        http_request.onreadystatechange = alertContents;
+        http_request.onreadystatechange = function(){
+            updateAllMarkers(markersApp)
+        };
         http_request.open('GET', url, false);
         http_request.send();
     }
     else if(req == 1){
         // make filter
-        http_request.onreadystatechange = alertContents;
+        http_request.onreadystatechange = function(){
+            updateAllMarkers(markersApp)
+        };
         http_request.open('POST', url, false);
         http_request.send(data);
     }
     else if( req == 2){
         // load info House
         http_request.onreadystatechange = alertContents;
-        http_request.open('POST', url, false);
-        http_request.send(data);
+        http_request.open('GET', url, false);
+        http_request.send();
     }
 
 }
 
-function alertContents() {
+function updateAllMarkers(mark) {
 
     if (http_request.readyState == 4) {
         if (http_request.status == 200) {
-            alert(http_request.responseText);
+            mark = jsonToMarkers(http_request.responseText)
         } else {
             alert('Hubo problemas con la petición.');
         }
     }
-
 }
+
+function updateHouseInfo(prop) {
+
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+            prop.loadInfo(http_request.responseText)
+        } else {
+            alert('Hubo problemas con la petición.');
+        }
+    }
+}
+
+async function doFilter(filt){
+    updateFilter(filt);
+    removeMarkers();
+    makeRequest('http://kasapp-elgrupitodeatras.herokuapp.com/map/filter', filt.toJson(), 1);
+    printMarkers();  
+}
+
+document.getElementById("btnCleanFilters").addEventListener("click",cleanFilters)
+document.getElementById("btnInitFilters").addEventListener("click",function(ev){
+    doFilter(filters)
+})
