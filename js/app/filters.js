@@ -30,7 +30,7 @@ class Filter{
     }
 }
 function loadFeatures(){
-    return ["Terraza", "zotano", "parqueadero", "Seguridad", "amueblado", "otra característica"];
+    return ["Terraza", "zotano", "parqueadero", "Seguridad", "amueblado"];
 }
 function loadFilters(){
     let typeFilter = new SingleFilter(-1, "type", ["Casa", "Apartamento", "Oficina", "Bodega"]);
@@ -226,24 +226,29 @@ function updateFilter(filter = new Filter()){
     console.log(filter.toJson())
 }
 
-async function makeQuery(){
-    //TODO
-    return ""
+async function makeQuery(filter){
+    //TODO pasar el objeto filter en json y esperar respuesta
+    const string =  filter.toJson();
+    //POST
+    return ''
 }
 
-function JsonToMarkers(jsonStr){
-    //TODO
-    return null
+function jsonToMarkers(jsonStr){
+    // make an aux marker object array
+    const jsonMarkersObject = JSON.parse(jsonStr)
+    const markersArray = []
+    for (let i = 0; i < jsonMarkersObject.length; i++) {
+        // init a new AppMarker objetc and push it into the array
+        markersArray.push(new AppMarker(jsonMarkersObject[i].latitude, jsonMarkersObject[i].longitude, jsonMarkersObject[i].id));
+    }
+    return markersArray;
 }
 
-function updateMarkers(newMarkers){
-    //TODO
-    return null
-}
+
 async function doFilter(filters){
     updateFilter(filters);
-    const answerQuery = makeQuery();
-    const newMarkers = JsonToMarkers(answerQuery);
+    const answerQuery = makeQuery(filter);
+    const newMarkers = jsonToMarkers(answerQuery);
     updateMarkers(newMarkers);
 }
 

@@ -12,10 +12,13 @@ class AppMarker{
         return JSON.stringify(this);
     }
 }
-function initMarkers(){
-    /* Load markers from database */
-    var markers = []
-    markers.push(new AppMarker(4.625726863055612, -74.13602537067082, 0))
-    markers.push(new AppMarker(4.6625629833684314, -74.05248017561198, 1))
+function initMarkers(filter){
+    /* Load markers from database 
+    // TODO cargar todos los marcadores
+    const str = makeQuery(filter);
+    const m = jsonToMarkers(str);
+    JSON.parse()
+    */
+    var markers = jsonToMarkers('[{"id":1,"latitude":4.593636989593506,"longitude":-74.10095977783203},{"id":2,"latitude":4.6625629833684314,"longitude":-74.05248017561198}]')
     return markers
 }
