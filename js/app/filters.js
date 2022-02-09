@@ -236,11 +236,13 @@ async function makeQuery(filter){
 function jsonToMarkers(jsonStr){
     // make an aux marker object array
     const jsonMarkersObject = JSON.parse(jsonStr)
+    console.log(jsonMarkersObject)
     const markersArray = []
     for (let i = 0; i < jsonMarkersObject.length; i++) {
         // init a new AppMarker objetc and push it into the array
         markersArray.push(new AppMarker(jsonMarkersObject[i].latitude, jsonMarkersObject[i].longitude, jsonMarkersObject[i].id));
     }
+    console.log(markersArray)
     return markersArray;
 }
 
